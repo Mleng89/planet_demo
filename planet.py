@@ -5,6 +5,10 @@ class Planet:
         self.radius = radius
         self.color = color
         self.mass = mass
+
+        self.orbit = []
+        self.sun = False
+        self.distance_to_sun = 0
         # Generating the circle for planets to move
         self.x_velocity = 0
         self.y_velocity = 0
