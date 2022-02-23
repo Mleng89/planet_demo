@@ -7,6 +7,7 @@ WIDTH, HEIGHT = 800, 800
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Planet Simulation!")
 
+
 WHITE = (255, 255, 255)
 ODDLACE = (253, 245, 230)
 YELLOW = (255, 255, 0)
