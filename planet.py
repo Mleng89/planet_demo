@@ -1,7 +1,11 @@
 import pygame
 import math
 
+pygame.font.init()
+
 WIDTH, HEIGHT = 800, 800
+WHITE = (255, 255, 255)
+FONT = pygame.font.SysFont("arial", 12)
 
 
 class Planet:
@@ -31,6 +35,25 @@ class Planet:
         x = self.x * self.SCALE + WIDTH / 2
         y = self.y * self.SCALE + HEIGHT / 2
         pygame.draw.circle(win, self.color, (x, y), self.radius)
+
+        if len(self.orbit) > 2:
+            updated_points = []
+            for point in self.orbit:
+                x, y = point
+                x = x * self.SCALE + WIDTH / 2
+                y = y * self.SCALE + HEIGHT / 2
+                updated_points.append((x, y))
+            pygame.draw.lines(win, self.color, False, updated_points, 2)
+        pygame.draw.circle(win, self.color, (x, y), self.radius)
+
+        if not self.sun:
+            distance_text = FONT.render(
+                f"{round(self.distance_to_sun/1000, 1)}km", 1, WHITE
+            )
+            win.blit(
+                distance_text,
+                (x - distance_text.get_width() / 2, y - distance_text.get_height() / 2),
+            )
 
     def force_of_attraction(self, other):
         other_x, other_y = other.x, other.y
