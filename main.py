@@ -1,8 +1,7 @@
 import pygame
 import math
-from planet import Planet as Planet
+from planet import Planet
 
-print("what is my planet", Planet.radius)
 pygame.init()
 
 WIDTH, HEIGHT = 800, 800
