@@ -10,7 +10,8 @@ class Planet:
     # Gravitational constance
     G = 6.67428e-11
     SCALE = 200 / AU  # 1 AU = ~100px in pygame
-    TIMESTEP = 3600 * 24  # Representing 1 day (3600 seconds in an hour * 24 hours)
+    # Representing 1 day (3600 seconds in an hour * 24 hours)
+    TIMESTEP = 3600 * 24
 
     def __init__(self, x, y, radius, color, mass):
         self.x = x
@@ -39,10 +40,29 @@ class Planet:
 
         if other.sun:
             self.distance_to_sun = distance
-
-        force = self.G * self.mass * other.mass / distance**2  # Straight line force
+        # Straight line force
+        force = self.G * self.mass * other.mass / distance**2
         theta = math.atan2(distance_y, distance_x)  # atan2 -> special function
         force_x = math.cos(theta) * force
         force_y = math.sin(theta) * force
 
         return force_x, force_y
+
+    def update_position(self, planets):
+        total_force_x = total_force_y = 0
+        for planet in planets:
+            if self == planet:
+                continue
+
+            force_x, force_y = self.force_of_attraction(planet)
+            total_force_x += force_x
+            total_force_y += force_y
+
+        self.x_velocity += total_force_x / self.mass * self.TIMESTEP
+        # F = mass / acceleration
+        self.y_velocity += total_force_y / self.mass * self.TIMESTEP
+
+        self.x += self.x_velocity * self.TIMESTEP
+        self.y += self.y_velocity * self.TIMESTEP
+
+        self.orbit.append((self.x, self.y))
