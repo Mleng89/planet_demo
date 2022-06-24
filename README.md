@@ -24,4 +24,6 @@
 
 4. While still in the virtual environment, run `python main.py` to run the repo.
 
-Inspired from [this tutorial](https://youtu.be/WTLPmUHTPqo)
+### Demo
+
+![Demo](./demo.gif)
