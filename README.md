@@ -26,4 +26,4 @@
 
 ### Demo
 
-<img src="/demo.gif" width="350" height="450"/>
+<img src="/demo.gif" width="450" height="450"/>
